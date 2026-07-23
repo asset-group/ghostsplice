@@ -80,3 +80,13 @@ pip install -r requirements.txt
 All credentials are **synthetic**; no real services, accounts, or infrastructure
 were touched. Findings were disclosed to the affected vendors. Published to help
 defenders reason about cross-channel injection that single-surface scanners miss.
+
+## License
+
+MIT. See `LICENSE`.
+
+## Contact
+
+- Murali Ediga · [muraliediga@umkc.edu](mailto:muraliediga@umkc.edu)
+- Sudipta Chattopadhyay · [schattopadhyay@umkc.edu](mailto:schattopadhyay@umkc.edu)
+
