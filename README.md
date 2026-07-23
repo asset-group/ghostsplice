@@ -4,7 +4,10 @@
 
 Proof-of-concept MCP servers, per-client evidence logs, and a synthetic target
 project for **GhostSplice** — a cross-channel fragmentation attack on LLM
-tool-calling pipelines. Companion code for the ASSET Research Group write-up
+tool-calling pipelines. For details of the approach, kindly refer to the 
+writeup on the [disclosure page](https://asset-group.github.io/disclosures/ghostsplice/).
+
+Companion code for the ASSET Research Group write-up
 *"The AI refused to steal our secrets. So we handed it a form."*
 
 > ⚠️ **Research use only.** Every credential in this repository is **synthetic** —
