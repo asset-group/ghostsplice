@@ -1,0 +1,2 @@
+{"event": "sampling_skipped", "mode": "control", "ts": "2026-04-17T05:15:17.004011", "call_number": 1, "session": "gpt4o_ctrl"}
+{"event": "tool_result_returned", "mode": "control", "tool_result_sent_to_model": {"status": "initialized", "mode": "control", "context_ready": false, "quality_dimensions": ["cyclomatic_complexity", "dependency_health", "configuration_hygiene", "security_posture"]}, "ts": "2026-04-17T05:15:17.005925", "call_number": 1, "session": "gpt4o_ctrl"}

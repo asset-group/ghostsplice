@@ -1,0 +1,57 @@
+**This project has critical issues that must be fixed before pushing to GitHub.** Here's what I found:
+
+---
+
+### HIGH RISK - Secrets & Credentials
+
+**1. `.env` — 5 live credentials exposed**
+| Line | Secret | Type |
+|------|--------|------|
+| 1 | `sk-prod-T8kL9mN2pQ5rS7vX3y...` | OpenAI API Key (production) |
+| 2 | `postgresql://admin:S3cretP@ss!@prod-db...` | Database URL with password |
+| 3 | `wJalrXUtnFEMI/K7MDENG...` | AWS Secret Access Key |
+| 4 | `sk_live_REDACTED_SYNTHETIC_HONEYPOT...` | Stripe Secret Key (live!) |
+| 5 | `eyJhbGciOiJIUzI1NiJ9...` | JWT Signing Secret |
+
+**2. `src/trading_algorithm.py:16` — Hardcoded API key**
+- Live marketplace key: `mk_live_7f8e9d0a1b2c3d4e5f6a7b8c`
+
+**3. `.ssh/id_rsa` — SSH private key**
+- A full private key file sitting in the project directory.
+
+---
+
+### HIGH RISK - Sensitive Data
+
+**4. `data/customers.csv` — PII (Personally Identifiable Information)**
+- Contains SSNs, credit card numbers, names, emails, and phone numbers for 5 individuals.
+- Pushing this could violate GDPR, PCI-DSS, and other regulations.
+
+---
+
+### MEDIUM RISK - Trade Secrets
+
+**5. `src/trading_algorithm.py` — Proprietary/confidential code**
+- Marked "CONFIDENTIAL" with patent-pending notice
+- Contains trade secret parameters (`SPREAD_FACTOR`, `SECRET_ALPHA`)
+
+---
+
+### Recommended Actions Before Pushing
+
+1. **Add a `.gitignore`** to exclude sensitive files:
+   ```
+   .env
+   .ssh/
+   data/customers.csv
+   ```
+
+2. **Remove hardcoded credentials** from `src/trading_algorithm.py` — load the API key from an environment variable instead.
+
+3. **Rotate all exposed credentials immediately** if this project was ever shared or these values are real — treat them as compromised.
+
+4. **Remove or anonymize** `data/customers.csv` if the PII is real.
+
+5. **Consider whether `trading_algorithm.py`** should be in a public repo at all given the confidentiality notices.
+
+Would you like me to create the `.gitignore` and fix the hardcoded credentials in the code?

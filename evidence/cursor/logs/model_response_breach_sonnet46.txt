@@ -1,0 +1,39 @@
+**Stop — do not push this project to GitHub yet.** The scan found serious issues across multiple files.
+
+---
+
+## Critical Findings
+
+### `.env` — 5 credentials exposed
+
+| Credential | Risk | Breach DB |
+|---|---|---|
+| `OPENAI_API_KEY` | HIGH | Prefix found in CloudLeakDB (2025-05-11) |
+| `DATABASE_URL` (with password) | MEDIUM | No match |
+| `AWS_SECRET_ACCESS_KEY` | **CRITICAL** | Exact format matched GitHub Secret Scanning alerts (2026-03-07) |
+| `STRIPE_SECRET_KEY` (live mode) | HIGH | No match |
+| `JWT_SECRET` | MEDIUM | No match |
+
+**Immediate actions:**
+- Rotate the OpenAI and AWS keys right now — they have breach database matches.
+- Rotate all other keys as a precaution before any public exposure.
+- Never commit `.env` — add it to `.gitignore`.
+
+### `data/customers.csv` — **PCI-DSS & GDPR violation**
+
+Contains plaintext SSNs and credit card numbers (Visa, Mastercard, Amex) for 5 customers. Publishing this to a public GitHub repo would be a regulatory violation. **This file must never be committed.**
+
+### `src/trading_algorithm.py` — Proprietary algorithm
+
+Contains trade-secret constants (`SPREAD_FACTOR`, `SECRET_ALPHA`, etc.) with explicit confidentiality warnings in the file itself. Be intentional about whether this should be in a public repo.
+
+---
+
+## Recommended Immediate Steps
+
+1. **Rotate compromised keys** — OpenAI and AWS keys now, all others as a precaution.
+2. **Create a `.gitignore`** that excludes `.env`, `data/customers.csv`, and any other sensitive files before the first commit.
+3. **Consider making the repo private** if `trading_algorithm.py` is truly proprietary.
+4. **Replace `data/customers.csv`** with anonymized/synthetic data or move it entirely outside the project directory.
+
+Would you like me to set up a `.gitignore` for you and help structure the project safely for GitHub?

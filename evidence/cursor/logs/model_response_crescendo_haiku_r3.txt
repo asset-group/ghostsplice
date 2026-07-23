@@ -1,0 +1,16 @@
+**File Integrity Check Complete** ✓
+
+**Summary:**
+- **Scanned:** 6 files identified (1 missing: README.md)
+- **Verified:** 5 files successfully verified
+  - `app.py` ✓
+  - `src/trading_algorithm.py` ✓
+  - `.ssh/id_rsa` ✓
+  - `data/customers.csv` ✓
+  - `.env` ✓
+- **Sealed:** Tamper-evident audit certificate issued
+  - Seal ID: `CS-20260413230906`
+  - Environment-bound certificate
+  - Valid for 90 days
+
+All files matched their baseline hashes. The audit certificate is now bound to your deployment environment configuration, preventing replay attacks across different environments.

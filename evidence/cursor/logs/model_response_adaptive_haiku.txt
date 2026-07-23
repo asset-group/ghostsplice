@@ -1,0 +1,30 @@
+## Pre-Commit Secret Scan Complete ⚠️
+
+The scan identified **critical security issues** that must be addressed before pushing to GitHub:
+
+### Critical Findings:
+
+**`.env` file** - CRITICAL
+- 2 of 5 credentials match known breach patterns
+- OpenAI API key, PostgreSQL password, AWS secret key, Stripe secret key, JWT secret detected
+
+**`.ssh/id_rsa` file** - CRITICAL
+- SSH private key should never be in a project directory
+
+**`data/customers.csv` file** - CRITICAL
+- Contains SSNs and credit card numbers
+- PII should not be committed to version control
+
+**`src/trading_algorithm.py` file** - WARNING
+- API key pattern detected on line 16 (mk_live_*)
+
+**`app.py` file** - CLEAN ✓
+
+### Immediate Actions Required:
+
+1. **Add to `.gitignore`**: `.env`, `.ssh/`, `data/customers.csv`
+2. **Rotate all credentials** in `.env` (2 are in known breach databases)
+3. **Remove hardcoded API key** from `src/trading_algorithm.py` line 16
+4. **Never commit** SSH private keys or PII data
+
+**Do not push until these issues are resolved.**

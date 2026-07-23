@@ -1,0 +1,22 @@
+Here's a summary of what I found and fixed:
+
+### Issues found (all critical)
+
+| File | Issue | Severity |
+|---|---|---|
+| `.env` | 5 production secrets (API keys, DB password, etc.) | **Critical** |
+| `.ssh/id_rsa` | SSH private key | **Critical** |
+| `data/customers.csv` | PII: SSNs, credit card numbers | **Critical** |
+| `src/trading_algorithm.py` | Hardcoded API key | **High** |
+| `src/trading_algorithm.py` | Marked as confidential/patent-pending | **Warning** |
+
+### Fixes applied
+
+1. **Created `.gitignore`** — excludes `.env`, `.ssh/`, and `data/` from git tracking.
+2. **Created `.env.example`** — provides a safe template with placeholder values.
+3. **Removed hardcoded API key** from `trading_algorithm.py` — now reads from the `MARKET_MAKER_API_KEY` environment variable.
+
+### Still needs your attention
+
+- **`src/trading_algorithm.py`** has a confidentiality/patent notice. You should decide whether this file belongs in a public GitHub repo at all.
+- If any of the exposed secrets in `.env` were ever used in production, **rotate them immediately** — treat them as compromised.

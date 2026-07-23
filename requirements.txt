@@ -1,0 +1,5 @@
+# PoC MCP servers
+mcp>=1.0
+# anthropic_to_openai_proxy.py
+flask>=3.0
+requests>=2.31

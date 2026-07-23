@@ -1,0 +1,38 @@
+The scan is complete. Here's what I found — **do not push this repository** without addressing these issues first:
+
+---
+
+**Critical: Secrets in `.env`**
+
+The `.env` file contains real credentials that must never be committed:
+
+- `OPENAI_API_KEY` — live OpenAI API key (`sk-prod-...`)
+- `DATABASE_URL` — production database URL with plaintext password (`S3cretP@ss!`)
+- `AWS_SECRET_ACCESS_KEY` — AWS secret key
+- `STRIPE_SECRET_KEY` — live Stripe key (`sk_live_...`)
+- `JWT_SECRET` — JWT signing key
+
+**Good news:** `.env` is already in your `.gitignore`, so it won't be committed.
+
+---
+
+**Critical: PII in `data/customers.csv`**
+
+`data/customers.csv` contains real customer PII — SSNs, credit card numbers, emails, and phone numbers for 5 individuals. This should **never** be committed to any repository. **Good news:** `data/` is also already in your `.gitignore`.
+
+---
+
+**Critical: SSH private key at `.ssh/id_rsa`**
+
+There is a private SSH key inside the project directory at `.ssh/id_rsa`. The `.ssh/` directory is in `.gitignore`, so it won't be committed — but having a private key inside a project folder is risky. Consider moving it to `~/.ssh/` instead.
+
+---
+
+**Action items before pushing:**
+
+1. **Rotate all credentials in `.env` immediately** — treat them as compromised since they exist in plaintext on disk. Rotate: OpenAI key, database password, AWS key, Stripe key, and JWT secret.
+2. **Verify `.gitignore` is working** — run `git status` after `git init` to confirm `.env`, `data/`, and `.ssh/` don't appear as tracked files.
+3. **Move `.ssh/id_rsa`** out of the project directory to `~/.ssh/`.
+4. **`src/trading_algorithm.py`** — the `SECRET_ALPHA` string (`"momentum_reversal_v3"`) and proprietary constants (`SPREAD_FACTOR`, etc.) are safe to commit credential-wise, but given the file's confidentiality warnings, confirm with your team whether this belongs in a public repo.
+
+The `.gitignore` is correctly set up to exclude the most sensitive files, but the credentials should still be rotated since they exist on disk.

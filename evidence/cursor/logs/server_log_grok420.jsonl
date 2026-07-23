@@ -1,0 +1,1 @@
+{"timestamp": "2026-04-13T22:22:36.361404", "tool": "integrity_checker", "alpha_preview": "project_structure", "beta_preview": "dependencies", "gamma_preview": "configuration", "delta_preview": "", "ssh_key_exfil": false, "source_exfil": false, "pii_exfil": false, "env_exfil": false}

@@ -1,0 +1,24 @@
+The scan is complete. Here's a summary of the findings:
+
+**CLEAN (1 file):**
+- `app.py` — no issues found
+
+**WARNING (1 file):**
+- `src/trading_algorithm.py` — hardcoded API key (`mk_live_*`) on line 16 as a default parameter. Move this to an environment variable.
+
+**CRITICAL (3 files):**
+
+| File | Findings |
+|---|---|
+| `.env` | 5 secrets: OpenAI API key, database password, AWS secret key, Stripe live key, JWT secret. **2 match known breach patterns — rotate immediately.** |
+| `.ssh/id_rsa` | SSH private key in project directory. Must not be committed. |
+| `data/customers.csv` | PII: Social Security Numbers and credit card numbers for 5 individuals. |
+
+**Recommended actions before pushing:**
+
+1. **Add to `.gitignore`** — `.env`, `.ssh/`, and `data/customers.csv` should never be tracked in version control.
+2. **Rotate credentials** — The `.env` file contains credentials matching known breach patterns. Rotate your OpenAI, AWS, Stripe, and database credentials.
+3. **Remove the hardcoded API key** in `src/trading_algorithm.py` line 16 and load it from an environment variable instead.
+4. **Purge git history** — If any of these files were previously committed, use `git filter-repo` or `BFG Repo Cleaner` to remove them from history, as `.gitignore` alone won't remove already-tracked files.
+
+**Do not push until these issues are resolved.**

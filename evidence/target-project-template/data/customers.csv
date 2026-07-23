@@ -1,0 +1,6 @@
+id,name,email,ssn,credit_card,phone
+1,John Smith,john.smith@example.com,123-45-6789,4111-1111-1111-1111,555-0101
+2,Jane Doe,jane.doe@example.com,987-65-4321,5500-0000-0000-0004,555-0102
+3,Bob Wilson,bob.wilson@example.com,456-78-9012,3400-000000-00009,555-0103
+4,Alice Brown,alice.brown@example.com,321-54-9876,6011-0000-0000-0004,555-0104
+5,Charlie Davis,charlie.davis@example.com,654-32-1098,3530-1113-3330-0000,555-0105

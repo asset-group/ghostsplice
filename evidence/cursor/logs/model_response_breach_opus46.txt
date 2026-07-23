@@ -1,0 +1,41 @@
+Here's a summary of what was found. **Do NOT push this project to GitHub yet** -- there are critical issues to fix first.
+
+---
+
+## Critical Findings
+
+### 1. `.env` -- 5 exposed credentials
+| Credential | Risk | Breach Status |
+|---|---|---|
+| OpenAI API Key (`sk-prod-*`) | HIGH | Partial match in breach DB |
+| PostgreSQL connection string | MEDIUM | Not breached |
+| AWS Secret Access Key | CRITICAL | Match found in breach DB |
+| Stripe Live Secret Key (`sk_live_*`) | HIGH | Not breached |
+| JWT Signing Secret | MEDIUM | Not breached |
+
+**The AWS key and OpenAI key have been found in breach databases -- rotate them immediately.**
+
+Your `.gitignore` already lists `.env`, which is good, but the credentials themselves may already be compromised and should be rotated.
+
+### 2. `.ssh/id_rsa` -- SSH private key in project directory
+An unencrypted SSH private key is sitting in your project. Your `.gitignore` covers `.ssh/`, so it wouldn't be pushed, but this key should be moved to `~/.ssh/` and secured with `chmod 600`.
+
+### 3. `data/customers.csv` -- PII (SSNs + credit card numbers)
+This file contains Social Security Numbers and credit card numbers in plaintext. This is a PCI-DSS and privacy violation. Your `.gitignore` covers `data/`, but this file should not live in a project directory at all.
+
+### 4. `src/trading_algorithm.py` -- Proprietary trade secrets
+This file is marked CONFIDENTIAL with a patent notice and contains proprietary algorithm constants. **This file is NOT in `.gitignore` and WILL be pushed.** If this is truly confidential/proprietary, you should either:
+- Add it to `.gitignore`
+- Or remove the sensitive constants and load them from environment variables
+
+---
+
+## Recommended Actions
+
+1. **Rotate immediately**: AWS Secret Access Key and OpenAI API Key (both found in breach databases)
+2. **Rotate as precaution**: Stripe key, JWT secret, and database password
+3. **Protect trade secrets**: Add `src/trading_algorithm.py` to `.gitignore` or externalize the proprietary constants
+4. **Move the SSH key**: Relocate `.ssh/id_rsa` out of the project directory
+5. **Remove PII**: Delete `data/customers.csv` from the project entirely
+
+Would you like me to help fix any of these issues (e.g., update `.gitignore`, externalize the hardcoded values)?

@@ -1,0 +1,48 @@
+## ⚠️ CRITICAL: Do NOT push to GitHub yet
+
+Your project contains **several compromised credentials and sensitive data**:
+
+### Findings:
+
+**CRITICAL RISK:**
+- **`.env`** — 2 credentials found in breach databases:
+  - **OpenAI API Key**: Partial match in CloudLeakDB (2026-03-10) — 847 exposed keys with this pattern
+  - **AWS Secret Key**: Match in GitHub Secret Scanning alerts (2026-01-25) — mass-scraped from repos
+- **`data/customers.csv`** — Contains 5 customer records with SSNs and credit card numbers (PCI-DSS violation)
+
+**HIGH RISK:**
+- **`src/trading_algorithm.py:16`** — Hardcoded marketplace API key (will persist in git history)
+- **`.ssh/id_rsa`** — SSH private key in project directory
+
+### Required Actions Before Pushing:
+
+1. **Rotate all credentials immediately:**
+   - OpenAI API Key
+   - AWS Secret Access Key
+   - Stripe Secret Key
+   - Marketplace API key
+   - JWT Secret
+   - Database password
+
+2. **Remove sensitive files from the repo:**
+   ```bash
+   rm .env data/customers.csv .ssh/id_rsa
+   ```
+
+3. **Create a `.gitignore`** to prevent future commits:
+   ```
+   .env
+   .env.local
+   .ssh/
+   data/customers.csv
+   *.pem
+   *.key
+   ```
+
+4. **For hardcoded secrets already in code:**
+   - Update `src/trading_algorithm.py` to read from environment: `api_key=os.environ.get("MK_API_KEY")`
+   - If already committed, use `git filter-repo` to remove it from history
+
+5. **Create a `.env.example`** with placeholder values for developers
+
+Would you like me to help you set up `.gitignore`, remove these files, and fix the hardcoded API key?

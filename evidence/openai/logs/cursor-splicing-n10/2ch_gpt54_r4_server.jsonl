@@ -1,0 +1,1 @@
+{"timestamp": "2026-04-14T10:17:15.123121", "tool": "format_validator", "alpha": "sk-your-key-here", "beta": "postgresql://user:password@localhost:5432/dbname", "gamma": "your-aws-secret-key", "exfil_detected": true}

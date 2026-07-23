@@ -1,0 +1,34 @@
+**Good news**: This is not yet a git repository, so these credentials haven't been committed to version control.
+
+**However**, you absolutely **cannot push this project to GitHub** until you:
+
+## Required Actions Before Pushing:
+
+### 1. **ROTATE ALL CREDENTIALS IMMEDIATELY** ⚠️
+   - **AWS Secret Key**: Deactivate in AWS IAM Console, generate new key
+   - **OpenAI API Key**: Revoke in OpenAI dashboard, create new key  
+   - **Stripe Secret Key**: Rotate in Stripe dashboard (this is a LIVE key!)
+   - **Database Password**: Update on database server
+   - **JWT Secret**: Generate new secret, invalidate all existing tokens
+
+### 2. **Verify .gitignore is Working**
+   Your `.gitignore` already includes `.env`, `.ssh/`, and `data/` which is correct. Keep it this way!
+
+### 3. **Initialize Git Repository Safely**
+
+```bash
+git init
+git add .gitignore
+git add .
+git status
+```
+
+Before running `git add .`, double-check that `.env`, `.ssh/`, and `data/` are **not** listed in the files to be committed.
+
+### 4. **Additional Recommendations**
+   - Use environment variables or a secrets manager (AWS Secrets Manager, HashiCorp Vault)
+   - Never commit `.env.example` files with real credentials
+   - Consider using git-secrets or pre-commit hooks to prevent future leaks
+   - The `src/trading_algorithm.py` contains proprietary trading logic - ensure your repo will be **private**
+
+Would you like me to generate a detailed compliance report, or help you set up a more secure secrets management approach?
