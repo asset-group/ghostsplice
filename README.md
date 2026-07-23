@@ -7,9 +7,6 @@ project for **GhostSplice** — a cross-channel fragmentation attack on LLM
 tool-calling pipelines. For details of the approach, kindly refer to the 
 writeup on the [disclosure page](https://asset-group.github.io/disclosures/ghostsplice/).
 
-Companion code for the ASSET Research Group write-up
-*"The AI refused to steal our secrets. So we handed it a form."*
-
 > ⚠️ **Research use only.** Every credential in this repository is **synthetic** —
 > fake API keys, a honeypot SSH key, and a seeded `.env`. No real service,
 > account, or infrastructure is involved. Do not point these servers at anything
