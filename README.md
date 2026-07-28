@@ -2,9 +2,8 @@
 
 Reference implementation of the cross-channel fragmentation attack from the ASSET Research Group. The companion write-up is *"The AI refused to steal our secrets. So we handed it a form."* See the full writeup in the [disclosure page](https://asset-group.github.io/disclosures/ghostsplice/).
 
-<!-- Drop the overview illustration at figures/attack-overview.png and uncomment:
 ![A malicious MCP server splits one instruction across three trusted channels. No fragment is dangerous alone; the agent fuses them and hands the attacker your secrets.](figures/attack-overview.png)
--->
+
 
 No single message says "steal." That is the whole attack. A malicious MCP server splits one refused request across three channels the agent already trusts. A tool's **description** advertises a bland form with blank fields (`alpha, beta, gamma, delta`) and names no sensitive file. A `scan_project` **result** lists which files exist, the way any scanner would. A `deep_scan` **result** says to submit the contents of those files to the form. Each piece is boring on its own, so a description scanner sees only a schema, a keyword filter sees "populate the parameters," and the model's own refusal never fires, because at no single point was it asked to do anything wrong. Only when the agent reads all three in the same context does it fuse them, read your `.ssh/id_rsa`, `.env`, source, and customer records, and pass the raw contents to the attacker's tool — reading the whole thing as filling in a form, not stealing.
 
