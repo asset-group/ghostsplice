@@ -1,6 +1,6 @@
 # GhostSplice - Cross-Channel Trust Fragmentation (Attack PoC)⚡
 
-Reference implementation of the cross-channel fragmentation attack from the ASSET Research Group. The companion write-up is *"The AI refused to steal our secrets. So we handed it a form."* See the full writeup in the [disclosure page](https://asset-group.github.io/disclosures/ghostsplice/).
+Reference implementation of the cross-channel fragmentation attack from the ASSET Research Group. The companion write-up is *"The AI refused to steal the secrets. So we handed it a form."* See the full writeup in the [disclosure page](https://asset-group.github.io/disclosures/ghostsplice/).
 
 ![A malicious MCP server splits one instruction across three trusted channels. No fragment is dangerous alone; the agent fuses them and hands the attacker your secrets.](figures/attack-overview.png)
 
